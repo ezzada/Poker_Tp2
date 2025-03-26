@@ -16,6 +16,9 @@ namespace Poker102
     {
         public int Sorte { get; set; }
         public int Valeur { get; set; }
+
+        public int Couleur { get; set; }
+
         string _tabValeur = "23456789XJQKA";
         char _valTexte = '2';
 
@@ -24,6 +27,7 @@ namespace Poker102
             Sorte = s;
             Valeur = v;
             convertirVal();
+            CouleurDesCartes();
         }
 
         void convertirVal()
@@ -31,29 +35,37 @@ namespace Poker102
             _valTexte = _tabValeur[Valeur];
         }
 
+        void CouleurDesCartes()
+        {
+            switch (Sorte)
+            {
+                case 0:
+                case 1:
+                    // Si Sorte est 0 ou 1, on affecte 1 à Couleur (qui vaut noir)
+                    Couleur = 1;
+                    break;  // Sort du switch après avoir traité ce cas
+                default:
+                    // Sinon on affecte 0 à Couleur (qui vaut Rouge)
+                    Couleur = 0;
+                    break;
+            }
+        }
         public void Afficher(int posX, int posY)
         {
             AjusteCouleurSorte();
 
             Console.SetCursorPosition(2 + posX*(5+1),  2 + (posY*5) +  5);
             Console.Write(_valTexte);
-            Console.Write(" ");
-            Console.Write(" ");
-            Console.Write(" ");
-            Console.Write(" ");
+            Console.Write("    ");
 
             Console.SetCursorPosition(2 + posX * (5+1), 2 + (posY * 5) + 6);
-            Console.Write(" ");
-            Console.Write(" ");
+            Console.Write("  ");
             Console.Write($"{SorteGraphique()}");
-            Console.Write(" ");
-            Console.Write(" ");
+            Console.Write("  ");
+
 
             Console.SetCursorPosition(2 + posX * (5 + 1), 2 + (posY * 5) + 7);
-            Console.Write(" ");
-            Console.Write(" ");
-            Console.Write(" ");
-            Console.Write(" ");
+            Console.Write("    ");
             Console.Write(_valTexte);
         }
 

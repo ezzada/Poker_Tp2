@@ -27,7 +27,7 @@ namespace Poker102
                 joueurs[i] = new MainJoueur(i, paquet.Distribuer(), paquet.Distribuer(), paquet.Distribuer(), paquet.Distribuer(), paquet.Distribuer());
             }
 
-            TricharMainsDesJoueurs();
+            TricherMainsDesJoueurs();
 
             foreach(MainJoueur joueur in joueurs)
             { 
@@ -38,7 +38,7 @@ namespace Poker102
             Util.SetNoirEttBlanc();
         }
 
-        static void TricharMainsDesJoueurs()
+        static void TricherMainsDesJoueurs()
         {
             joueurs[0].Cartes[0] = new Carte(0, 12);
             joueurs[0].Cartes[1] = new Carte(0, 10);

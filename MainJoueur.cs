@@ -9,6 +9,8 @@ namespace Poker102
     internal class MainJoueur
     {
         public Carte[] Cartes = new Carte[5];
+        public int ValeurMain { get; set; }
+
         int _numeroJoueur;
 
 
@@ -22,6 +24,89 @@ namespace Poker102
             Cartes[4] = c4;
 
             Trier();
+        }
+
+        public void CalculeValueDuneMain()
+        {
+            int cestQuoi = 0;
+            cestQuoi = QuintCouleur();
+            switch (cestQuoi)
+            {
+                case 8:
+
+                default:
+                    ValeurMain += 0;
+                    break;
+            }
+        }
+        public int QuintCouleur()
+        {
+            for (int i = 0; i < Cartes.Length; i++)
+            {
+                if (Cartes[i].Valeur != Cartes[i + 1].Valeur - 1 || Cartes[i].Couleur != Cartes[i + 1].Couleur) 
+                    return 1;
+            }
+            return 8;
+        }
+        public int Carre()
+        {
+            for (int i = 0; i < Cartes.Length - 1 ; i++)
+            {
+                if (Cartes[i].Valeur != Cartes[i + 1].Valeur)
+                    return 1;
+            }
+            return 7;
+        }
+
+        public int Full()
+        {
+            for (int i = 0; i < Cartes.Length - 2; i++)
+            {
+                if (Cartes[i].Valeur != Cartes[i - 1].Valeur)
+                    return 1;
+            }
+            for (int i = 3; i < Cartes.Length; i++)
+            {
+                if (Cartes[i].Valeur != Cartes[i - 1].Valeur)
+                    return 1;
+            }
+            return 6;
+        }
+        public int Couleur()
+        {
+            for (int i = 0; i < Cartes.Length; i++)
+            {
+                if (Cartes[i].Couleur != Cartes[i - 1].Couleur)
+                    return 1;
+            }
+            return 5;
+        }
+        public int Quint()
+        {
+            for (int i = 0; i < Cartes.Length; i++)
+            {
+                if (Cartes[i].Valeur != Cartes[i - 1].Valeur - 1)
+                    return 1;
+            }
+            return 4;
+        }
+        public int Brelan()
+        {
+            bool test = true;
+            for (int i = 0; i < Cartes.Length - 2; i++)
+            {
+                if (Cartes[i].Valeur == Cartes[i + 1].Valeur)
+                    
+            }
+            return 3;
+        }
+        public int DoublePair()
+        {
+            
+            
+               
+            
+            return 3;
         }
 
         public void Afficher()
