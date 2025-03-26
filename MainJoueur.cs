@@ -43,34 +43,52 @@ namespace Poker102
         {
             for (int i = 0; i < Cartes.Length; i++)
             {
-                if (Cartes[i].Valeur != Cartes[i + 1].Valeur - 1 || Cartes[i].Couleur != Cartes[i + 1].Couleur) 
-                    return 1;
+                if (i < Cartes.Length)
+                {
+                    //Si la valeur de l'as est de zéro  
+                    if (Cartes[i].Valeur == 13 && Cartes[i+1].Valeur == 4)
+                    {
+                        continue;
+                    }
+
+                    if (Cartes[i].Valeur != Cartes[i + 1].Valeur - 1 || Cartes[i].Couleur != Cartes[i + 1].Couleur)
+                        return 0;
+                }
+                
             }
             return 8;
         }
         public int Carre()
         {
-            for (int i = 0; i < Cartes.Length - 1 ; i++)
+            
+            for (int i = 0; i < Cartes.Length; i++)
             {
-                if (Cartes[i].Valeur != Cartes[i + 1].Valeur)
-                    return 1;
+                int compteur = 0;
+                for (int j = 0; j < Cartes.Length; j++)
+                {
+                    if (Cartes[i].Valeur == Cartes[j].Valeur)
+                    {
+                        compteur++;
+                    }
+
+                    if (compteur == 4)
+                    {
+                        return 7;
+                    }
+                    
+                }
             }
-            return 7;
+            return 0;
         }
 
         public int Full()
         {
-            for (int i = 0; i < Cartes.Length - 2; i++)
+            if (((Cartes[0].Valeur == Cartes[1].Valeur && Cartes[0].Valeur == Cartes[2].Valeur) || (Cartes[0].Valeur == Cartes[1].Valeur)) && 
+                ((Cartes[4].Valeur == Cartes[3].Valeur && Cartes[4].Valeur == Cartes[2].Valeur) || ((Cartes[4].Valeur == Cartes[3].Valeur))))
             {
-                if (Cartes[i].Valeur != Cartes[i - 1].Valeur)
-                    return 1;
+                return 6;
             }
-            for (int i = 3; i < Cartes.Length; i++)
-            {
-                if (Cartes[i].Valeur != Cartes[i - 1].Valeur)
-                    return 1;
-            }
-            return 6;
+            return 0; 
         }
         public int Couleur()
         {
@@ -85,8 +103,18 @@ namespace Poker102
         {
             for (int i = 0; i < Cartes.Length; i++)
             {
-                if (Cartes[i].Valeur != Cartes[i - 1].Valeur - 1)
-                    return 1;
+                if (i < Cartes.Length)
+                {
+                    //Si la valeur de l'as est de zéro  
+                    if (Cartes[i].Valeur == 13 && Cartes[i + 1].Valeur == 4)
+                    {
+                        continue;
+                    }
+
+                    if (Cartes[i].Valeur != Cartes[i + 1].Valeur - 1)
+                        return 0;
+                }
+
             }
             return 4;
         }
@@ -95,7 +123,7 @@ namespace Poker102
             bool test = true;
             for (int i = 0; i < Cartes.Length - 2; i++)
             {
-                if (Cartes[i].Valeur == Cartes[i + 1].Valeur)
+                if (Cartes[i].Valeur == Cartes[i + 1].Valeur) ;
                     
             }
             return 3;
