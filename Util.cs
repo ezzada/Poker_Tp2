@@ -105,6 +105,6 @@ namespace Poker102
             Console.ForegroundColor = ConsoleColor.Black;
             ViderEcran();
         }
-
+        
     }
 }

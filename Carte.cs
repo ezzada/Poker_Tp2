@@ -17,6 +17,7 @@ namespace Poker102
         public int Sorte { get; set; }
         public int Valeur { get; set; }
 
+        public bool Gagnant { get; set; }
         public int Couleur { get; set; }
 
         string _tabValeur = "23456789XJQKA";
@@ -25,6 +26,10 @@ namespace Poker102
         public Carte(int s = 0, int v = 0)
         {
             Sorte = s;
+            if (Gagnant)
+            {
+                Sorte = 4;
+            }
             Valeur = v;
             convertirVal();
             CouleurDesCartes();
@@ -104,6 +109,10 @@ namespace Poker102
                 case 3:
                     Console.BackgroundColor = ConsoleColor.DarkRed;
                     Console.ForegroundColor = ConsoleColor.White;
+                    break;
+                case 4:
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Red;
                     break;
             }
         }
