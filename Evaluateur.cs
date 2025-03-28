@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using pokerTp2;
@@ -58,28 +59,65 @@ namespace Poker102
         }
         public int getValeur()
         {
-           
-            if (true)
+            
+            if (QuintCouleur())
             {
-
+                ValeurMain = 8000000;
+            }
+            else if(Carre())
+            {
+                ValeurMain = 7000000;
+            }
+            else if (Full())
+            {
+                ValeurMain = 6000000;
+            }
+            else if (Couleur())
+            {
+                ValeurMain = 5000000;
+            }
+            else if (Quint())
+            {
+                ValeurMain = 4000000;
+            }
+            else if (Brelan())
+            {
+                ValeurMain = 3000000;
+            }
+            else if (DoublePair())
+            {
+                ValeurMain = 2000000;
+            }
+            else if (IntPair())
+            {
+                ValeurMain = 1000000;
+            }
+            else
+            {
+                ValeurMain = 0;
             }
 
+            ValeurMain += valeurCartes();
             return ValeurMain;
         }
         public bool QuintCouleur()
         {
             for (int i = 0; i < Cartes.Length; i++)
             {
-                if (i < Cartes.Length)
+                int positionTMP = i + 1;
+                if (positionTMP < Cartes.Length)
                 {
                     //Si la valeur de l'as est de zéro  
-                    if (Cartes[i].Valeur == 13 && Cartes[i + 1].Valeur == 4)
+                    if (Cartes[i].Valeur == 12 && Cartes[positionTMP].Valeur == 3)
                     {
                         continue;
                     }
 
-                    if (Cartes[i].Valeur != Cartes[i + 1].Valeur - 1 || Cartes[i].Couleur != Cartes[i + 1].Couleur)
+                    if (Cartes[positionTMP].Valeur != Cartes[i].Valeur - 1 || Cartes[positionTMP].Couleur != Cartes[i].Couleur)
+                    {
                         return false;
+                    }
+                        
                 }
 
             }
@@ -107,7 +145,6 @@ namespace Poker102
             }
             return false;
         }
-
         public bool Full()
         {
             if (((Cartes[0].Valeur == Cartes[1].Valeur && Cartes[0].Valeur == Cartes[2].Valeur) || (Cartes[0].Valeur == Cartes[1].Valeur)) &&
@@ -121,8 +158,16 @@ namespace Poker102
         {
             for (int i = 0; i < Cartes.Length; i++)
             {
-                if (Cartes[i].Couleur != Cartes[i - 1].Couleur)
-                    return false;
+                int positionTMP = i + 1;
+                if (positionTMP < Cartes.Length)
+                { 
+                    
+                    if (Cartes[positionTMP].Couleur != Cartes[i].Couleur)
+                    {
+                        return false;
+                    }
+
+                }
             }
             return true;
         }
@@ -130,16 +175,20 @@ namespace Poker102
         {
             for (int i = 0; i < Cartes.Length; i++)
             {
-                if (i < Cartes.Length)
+                int positionTMP = i + 1;
+                if (positionTMP < Cartes.Length)
                 {
                     //Si la valeur de l'as est de zéro  
-                    if (Cartes[i].Valeur == 13 && Cartes[i + 1].Valeur == 4)
+                    if (Cartes[i].Valeur == 12 && Cartes[positionTMP].Valeur == 3)
                     {
                         continue;
                     }
 
-                    if (Cartes[i].Valeur != Cartes[i + 1].Valeur - 1)
+                    if (Cartes[positionTMP].Valeur != Cartes[i].Valeur - 1)
+                    {
                         return false;
+                    }
+
                 }
 
             }
@@ -147,27 +196,96 @@ namespace Poker102
         }
         public bool Brelan()
         {
-            
-            for (int i = 0; i < Cartes.Length - 2; i++)
+            int compteur = 1;
+            for (int i = 0; i < Cartes.Length; i++)
             {
-                if (Cartes[i].Valeur == Cartes[i + 1].Valeur);
+                int positionTMP = i + 1;
+                if (positionTMP < Cartes.Length)
+                {
+                    //Si la valeur de l'as est de 
+
+                    if (Cartes[positionTMP].Valeur != Cartes[i].Valeur)
+                    {
+                        compteur = 0;
+                    }
+                    else
+                    {
+                        compteur ++;
+                    }
+
+                }
+                if (compteur == 3)
+                {
+                    return true;
+                }
 
             }
-            return true;
+            return false;
         }
-        public int DoublePair()
+        public bool DoublePair()
         {
 
-
-
-
-            return 3;
+            int compteur = 1;
+            int doubleTest = 0;
+            for (int i = 0; i < Cartes.Length; i += 2)
+            {
+                int positionTMP = i + 1;
+                if (positionTMP < Cartes.Length)
+                {
+                    if (Cartes[positionTMP].Valeur != Cartes[i].Valeur)
+                    {
+                        compteur = 0;
+                    }
+                    else
+                    {
+                        compteur++;
+                    }
+                }
+                if (compteur == 2)
+                {
+                    compteur = 1;
+                    doubleTest++;
+                }
+                if (doubleTest == 2)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
-        public int IntPair() 
+        public bool IntPair() 
         {
-            return 4;
+            int compteur = 1;
+            for (int i = 0; i < Cartes.Length; i++)
+            {
+                int positionTMP = i + 1;
+                if (positionTMP < Cartes.Length)
+                {
+                    //Si la valeur de l'as est de 
+
+                    if (Cartes[positionTMP].Valeur != Cartes[i].Valeur)
+                    {
+                        compteur = 0;
+                    }
+                    else
+                    {
+                        compteur++;
+                    }
+
+                }
+                if (compteur == 2)
+                {
+                    return true;
+                }
+
+            }
+            return false;
         }
 
+        public int valeurCartes()
+        {
+            return (int)(Math.Pow(Cartes[0].Valeur, 5) + Math.Pow(Cartes[1].Valeur, 4) + Math.Pow(Cartes[2].Valeur, 3) + Math.Pow(Cartes[3].Valeur, 2) + Math.Pow(Cartes[4].Valeur, 1));
+        }
         
 
     }

@@ -37,7 +37,7 @@ namespace Poker102
         }
 
         // Méthode pour obtenir la valeur de la main du joueur
-        public int Valeur()
+        public int valeur()
         {
             // L'évaluateur va calculer la valeur de la main
             return evaluateur.getValeur();

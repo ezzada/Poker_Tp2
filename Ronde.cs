@@ -25,28 +25,30 @@ namespace pokerTp2
                 joueurs[i] = new MainJoueur(i, paquet.Distribuer(), paquet.Distribuer(), paquet.Distribuer(), paquet.Distribuer(), paquet.Distribuer());
             }
 
-            Ronde.TricherMainsDesJoueurs();
+            //Ronde.TricherMainsDesJoueurs();
 
             foreach (MainJoueur joueur in joueurs)
             {
                 joueur.Afficher();
+                Console.SetCursorPosition(0, joueur._numeroJoueur);
+                Console.WriteLine("Joueur " + (joueur._numeroJoueur + 1) + " : " + joueur.valeur());
             }
 
         }
         public static void TricherMainsDesJoueurs()
         {
-            joueurs[0].Cartes[0] = new Carte(0, 12);
-            joueurs[0].Cartes[1] = new Carte(0, 10);
-            joueurs[0].Cartes[2] = new Carte(0, 11);
-            joueurs[0].Cartes[3] = new Carte(0, 9);
-            joueurs[0].Cartes[4] = new Carte(0, 8);
-
+            joueurs[0].Cartes[0] = new Carte(2, 4);
+            joueurs[0].Cartes[1] = new Carte(2, 5);
+            joueurs[0].Cartes[2] = new Carte(2, 2);
+            joueurs[0].Cartes[3] = new Carte(3, 1);
+            joueurs[0].Cartes[4] = new Carte(2, 0);
+            
             joueurs[1].Cartes[0] = new Carte(0, 12);
-            joueurs[1].Cartes[1] = new Carte(1, 12);
+            joueurs[1].Cartes[1] = new Carte(0, 12);
             joueurs[1].Cartes[2] = new Carte(2, 12);
-            joueurs[1].Cartes[3] = new Carte(3, 12);
+            joueurs[1].Cartes[3] = new Carte(0, 1);
             joueurs[1].Cartes[4] = new Carte(0, 0);
-
+         
             joueurs[2].Cartes[0] = new Carte(2, 12);
             joueurs[2].Cartes[1] = new Carte(3, 0);
             joueurs[2].Cartes[2] = new Carte(3, 1);
