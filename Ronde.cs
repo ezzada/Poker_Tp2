@@ -10,32 +10,29 @@ namespace pokerTp2
 {
     internal class Ronde
     {
-        public static Evaluateur[] EvaluationDesjoueur = new Evaluateur[4];
-        public static MainJoueur [] joueurs = new MainJoueur[4];
+        public static MainJoueur[] joueurs = new MainJoueur[4];
+        
         public static void Algorithme()
         {
-            
+       
 
             Paquet paquet = new Paquet();
             paquet.Brasser();
 
             for (int i = 0; i < 4; i++)
             {
-                EvaluationDesjoueur[i] = new Evaluateur(i, paquet.Distribuer(), paquet.Distribuer(), paquet.Distribuer(), paquet.Distribuer(), paquet.Distribuer());
+                joueurs[i] = new MainJoueur(i, paquet.Distribuer(), paquet.Distribuer(), paquet.Distribuer(), paquet.Distribuer(), paquet.Distribuer());
             }
 
-            for (int i = 0; i < 4; i++)
-            {
+            Ronde.TricherMainsDesJoueurs();
 
-            }
-            //TricherMainsDesJoueurs
             foreach (MainJoueur joueur in joueurs)
             {
                 joueur.Afficher();
             }
 
         }
-        public void TricherMainsDesJoueurs()
+        public static void TricherMainsDesJoueurs()
         {
             joueurs[0].Cartes[0] = new Carte(0, 12);
             joueurs[0].Cartes[1] = new Carte(0, 10);

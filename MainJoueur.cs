@@ -10,45 +10,48 @@ namespace Poker102
     internal class MainJoueur
     {
 
-
-
         public Carte[] Cartes { get; set; } = new Carte[5];
 
-        public int ValeurMainFinnal { get; set; }
-
         public int _numeroJoueur;
-        public string ValeurMainFinnalText { get; set; }
 
-        Evaluateur evaluateur;
-        public MainJoueur(int nj, Carte c0, Carte c1, Carte c2, Carte c3, Carte c4)
+        // Instance de l'évaluateur pour analyser la main du joueur
+        private Evaluateur evaluateur;
+
+
+        // Constructeur qui prend les cartes et crée un évaluateur
+        public MainJoueur(int numeroJoueur, Carte c0, Carte c1, Carte c2, Carte c3, Carte c4)
         {
-            _numeroJoueur = nj;
+            _numeroJoueur = numeroJoueur;
             Cartes[0] = c0;
             Cartes[1] = c1;
             Cartes[2] = c2;
             Cartes[3] = c3;
             Cartes[4] = c4;
-            //evaluateur = new Evaluateur();
+
+            // Créer un évaluateur avec les cartes du joueur
+            evaluateur = new Evaluateur(Cartes);
         }
 
-        public void Valeur()
+        // Méthode pour obtenir la valeur de la main du joueur
+        public int Valeur()
         {
-
+            // L'évaluateur va calculer la valeur de la main
+            return evaluateur.getValeur();
         }
+
+        public string valeurEnFrancais()
+        {
+            return evaluateur.ConvetirValeurEnFrancais(evaluateur.getValeur());
+        }
+
+        // Méthode pour afficher les cartes du joueur
         public void Afficher()
         {
-
-                                            
-
             for (int i = 0; i < 5; i++)
             {
-                Cartes[i].Afficher(i, _numeroJoueur);
+                Cartes[i].Afficher(i, _numeroJoueur); 
+
             }
         }
-
-
-
-
-
     }
 }

@@ -11,22 +11,15 @@ namespace Poker102
     {
 
         Carte[] Cartes { get; set; } = new Carte[5];
-        public int _numeroJoueur;
+        
         public int ValeurMain { get; set; }
+        public string ValeurTextuelle { get; set; }
 
-        public string[] _tabValeur = { "Deux", "Trois", "Quatre", "Cinq", "Six", "Sept", "Huit", "Neuf", "Dix", "Valet", "Reine", "Roi", "l'As" };
-        public Evaluateur(int nj, Carte c0, Carte c1, Carte c2, Carte c3, Carte c4)
+        public Evaluateur(Carte[] cartes)
         {
-            _numeroJoueur = nj;
-            Cartes[0] = c0;
-            Cartes[1] = c1;
-            Cartes[2] = c2;
-            Cartes[3] = c3;
-            Cartes[4] = c4;
+            Cartes = cartes;
             TrierMain();
-            //evaluateur = new Evaluateur();
         }
-
         void TrierMain()
         {
             Array.Sort(Cartes, ComparerCarte);
@@ -39,6 +32,11 @@ namespace Poker102
             if (cA.Valeur > cB.Valeur)
                 return -1;
             return 0;
+        }
+
+        public string ConvetirValeurEnFrancais(int valeurMain)
+        {
+            return ValeurTextuelle;
         }
         public int getValeur()
         {
@@ -147,7 +145,12 @@ namespace Poker102
 
             return 3;
         }
+        public int IntPair() 
+        {
+            return 4;
+        }
 
         
+
     }
 }
