@@ -12,28 +12,46 @@ namespace Poker102
 
         Carte[] Cartes { get; set; } = new Carte[5];
         
+        
+
+        
         public int ValeurMain { get; set; }
         public string ValeurTextuelle { get; set; }
 
+
+        //Va servire a trouver leur étage
+        private List<int> valeurDesCartes = new List<int>();
+        private List<int> nombreDeRecuranceDeChaqueValeur = new List<int>();
         public Evaluateur(Carte[] cartes)
         {
             Cartes = cartes;
-            TrierMain();
         }
-        void TrierMain()
+        public void TrouverLesSorteLeurNombreDeRecurence()
         {
-            Array.Sort(Cartes, ComparerCarte);
+            int recurence = 1;
+            for (int i = 0; i < Cartes.Length; i++)
+            {
+                int positionTMP = i + 1;
+                if (positionTMP < Cartes.Length)
+                {
+                    if (Cartes[i].Valeur != Cartes[positionTMP].Valeur)
+                    {
+                        valeurDesCartes.Add(Cartes[i].Valeur);
+                        nombreDeRecuranceDeChaqueValeur.Add(recurence);
+                        recurence = 1;
+                    }
+                    else
+                    {
+                        recurence++;
+                    }
+                }
+                else
+                {
+                    valeurDesCartes.Add(Cartes[i].Valeur);
+                    nombreDeRecuranceDeChaqueValeur.Add(recurence);
+                }
+            }
         }
-
-        int ComparerCarte(Carte cA, Carte cB)
-        {
-            if (cA.Valeur < cB.Valeur)
-                return 1;
-            if (cA.Valeur > cB.Valeur)
-                return -1;
-            return 0;
-        }
-
         public string ConvetirValeurEnFrancais(int valeurMain)
         {
             return ValeurTextuelle;

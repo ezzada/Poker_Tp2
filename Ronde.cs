@@ -12,6 +12,7 @@ namespace pokerTp2
     {
         public static MainJoueur[] joueurs = new MainJoueur[4];
         
+        
         public static void Algorithme()
         {
        

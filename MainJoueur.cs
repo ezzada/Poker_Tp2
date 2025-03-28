@@ -28,8 +28,12 @@ namespace Poker102
             Cartes[3] = c3;
             Cartes[4] = c4;
 
+            TrierMain();
+            
             // Créer un évaluateur avec les cartes du joueur
             evaluateur = new Evaluateur(Cartes);
+
+            evaluateur.TrouverLesSorteLeurNombreDeRecurence();
         }
 
         // Méthode pour obtenir la valeur de la main du joueur
@@ -49,9 +53,23 @@ namespace Poker102
         {
             for (int i = 0; i < 5; i++)
             {
+                TrierMain();
                 Cartes[i].Afficher(i, _numeroJoueur); 
 
             }
+        }
+        public void TrierMain()
+        {
+            Array.Sort(Cartes, ComparerCarte);
+        }
+
+        int ComparerCarte(Carte cA, Carte cB)
+        {
+            if (cA.Valeur < cB.Valeur)
+                return 1;
+            if (cA.Valeur > cB.Valeur)
+                return -1;
+            return 0;
         }
     }
 }
