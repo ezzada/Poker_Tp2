@@ -13,17 +13,19 @@ namespace Poker102
         Ronde analyseDesMains = new Ronde();
         static void Main(string[] args)
         {
+            bool continuerPartie = true;
 
-            
-            Util.InitTapis();
-
-            Util.Titre("Poker 102!");
-
-            Ronde.Algorithme();
-
-            Util.Pause();
-
-            Util.SetNoirEttBlanc();
+            while (continuerPartie)
+            {
+                Util.InitTapis();
+                Util.Titre("Tp2 Poker");
+                Ronde.Algorithme();
+                Console.SetCursorPosition(Console.WindowWidth - 1, 3);
+                Util.Pause();
+                Util.Question( ref continuerPartie,"Voulez-vous refaire une partie?");
+            }
+            Util.ViderEcran();
+            Util.Titre("Projet Réaliser par Adam Ezzahiri");
         }
 
         

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using pokerTp2;
 
 namespace Poker102
 {
@@ -16,8 +17,6 @@ namespace Poker102
     {
         public int Sorte { get; set; }
         public int Valeur { get; set; }
-
-        public bool Gagnant { get; set; }
         public int Couleur { get; set; }
 
         string _tabValeur = "23456789XJQKA";
@@ -26,10 +25,6 @@ namespace Poker102
         public Carte(int s = 0, int v = 0)
         {
             Sorte = s;
-            if (Gagnant)
-            {
-                Sorte = 4;
-            }
             Valeur = v;
             convertirVal();
             CouleurDesCartes();
@@ -58,20 +53,22 @@ namespace Poker102
         public void Afficher(int posX, int posY)
         {
             AjusteCouleurSorte();
-
-            Console.SetCursorPosition(2 + posX*(5+1),  2 + (posY*5) +  5);
+           
+            Console.SetCursorPosition(Ronde.DECALAGE_X/4 + posX*(5+1),  4 + (posY*5) +  5);
             Console.Write(_valTexte);
             Console.Write("    ");
 
-            Console.SetCursorPosition(2 + posX * (5+1), 2 + (posY * 5) + 6);
+            Console.SetCursorPosition(Ronde.DECALAGE_X/4 + posX * (5+1), 4 + (posY * 5) + 6);
             Console.Write("  ");
             Console.Write($"{SorteGraphique()}");
             Console.Write("  ");
 
 
-            Console.SetCursorPosition(2 + posX * (5 + 1), 2 + (posY * 5) + 7);
+            Console.SetCursorPosition(Ronde.DECALAGE_X/4 + posX * (5 + 1), 4 + (posY * 5) + 7);
             Console.Write("    ");
             Console.Write(_valTexte);
+
+            Util.SetNoirEttBlanc();
         }
 
         char SorteGraphique()

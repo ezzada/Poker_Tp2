@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using pokerTp2;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Poker102
 {
@@ -13,10 +14,9 @@ namespace Poker102
         public Carte[] Cartes { get; set; } = new Carte[5];
 
         public int _numeroJoueur;
-
+        public bool Gagnant { get; set; }
         // Instance de l'évaluateur pour analyser la main du joueur
         private Evaluateur evaluateur;
-
 
         // Constructeur qui prend les cartes et crée un évaluateur
         public MainJoueur(int numeroJoueur, Carte c0, Carte c1, Carte c2, Carte c3, Carte c4)
@@ -29,11 +29,11 @@ namespace Poker102
             Cartes[4] = c4;
 
             TrierMain();
-            
+
             // Créer un évaluateur avec les cartes du joueur
             evaluateur = new Evaluateur(Cartes);
+            
 
-            evaluateur.TrouverLesSorteLeurNombreDeRecurence();
         }
 
         // Méthode pour obtenir la valeur de la main du joueur
@@ -51,9 +51,19 @@ namespace Poker102
         // Méthode pour afficher les cartes du joueur
         public void Afficher()
         {
+            TrierMain();
+            evaluateur.TrouverLesSorteLeurNombreDeRecurence();
+
+            if (Gagnant)
+            {
+                foreach (Carte carte in Cartes)
+                {
+                    
+                }
+            }
             for (int i = 0; i < 5; i++)
             {
-                TrierMain();
+                
                 Cartes[i].Afficher(i, _numeroJoueur); 
 
             }

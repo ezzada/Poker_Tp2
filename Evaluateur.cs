@@ -13,14 +13,10 @@ namespace Poker102
 
         Carte[] Cartes { get; set; } = new Carte[5];
         
-        
-
-        
         public int ValeurMain { get; set; }
         public string ValeurTextuelle { get; set; }
 
-
-        //Va servire a trouver leur étage
+        //Va servire a trouver leur etage
         private List<int> valeurDesCartes = new List<int>();
         private List<int> nombreDeRecuranceDeChaqueValeur = new List<int>();
         public Evaluateur(Carte[] cartes)
@@ -55,6 +51,85 @@ namespace Poker102
         }
         public string ConvetirValeurEnFrancais(int valeurMain)
         {
+            string[] valeurTextuelCartes = { "de deux", "de trois", "de quatre", "de cinq", "de six", "de sept", "de huit", "de neuf", "de dix", "de valet", "de reine", "de roi", "d'as" };
+
+            if (QuintCouleur())
+            {
+                ValeurTextuelle = $"Quint Couleur vers la carte {valeurTextuelCartes[Cartes[0].Valeur]}";
+            }
+            else if (Carre())
+            {
+                for (int i = 0; i < nombreDeRecuranceDeChaqueValeur.Count(); i++)
+                {
+                    if (nombreDeRecuranceDeChaqueValeur[i] == 4)
+                    {
+                        ValeurTextuelle = $"Carre composer de quatre cartes {valeurTextuelCartes[valeurDesCartes[i]]}";
+                    }
+                }
+            }
+            else if (Full())
+            {
+                int troisRecurence = 0;
+                int deuxRecurence = 0;
+                for (int i = 0; i < nombreDeRecuranceDeChaqueValeur.Count(); i++)
+                {
+                    if (nombreDeRecuranceDeChaqueValeur[i] == 3)
+                    {
+                        troisRecurence = i;
+                    }
+                    if (nombreDeRecuranceDeChaqueValeur[i] == 2)
+                    {
+                        deuxRecurence = i;
+                    }
+                }
+                
+                ValeurTextuelle = $"Full composé d'un triplet {valeurTextuelCartes[valeurDesCartes[troisRecurence]]} et d'une pair {valeurTextuelCartes[valeurDesCartes[deuxRecurence]]}";
+                
+            }
+            else if (Couleur())
+            {
+                ValeurTextuelle = $"Même couleur avec une valeur {valeurTextuelCartes[Cartes[0].Valeur]}, {valeurTextuelCartes[Cartes[1].Valeur]}, {valeurTextuelCartes[Cartes[2].Valeur]}, {valeurTextuelCartes[Cartes[3].Valeur]}, {valeurTextuelCartes[Cartes[4].Valeur]}";
+            }
+            else if (Quint())
+            {
+                ValeurTextuelle = $"Quint vers la carte {valeurTextuelCartes[Cartes[0].Valeur]}";
+            }
+            else if (Brelan())
+            {
+                for (int i = 0; i < nombreDeRecuranceDeChaqueValeur.Count(); i++)
+                {
+                    if (nombreDeRecuranceDeChaqueValeur[i] == 3)
+                    {
+                        ValeurTextuelle = $"Brelan composer de trois cartes {valeurTextuelCartes[valeurDesCartes[i]]}";
+                    }
+                }
+            }
+            else if (DoublePair())
+            {
+                List<int> positionDesRécurence = new List<int>();
+                for (int i = 0; i < nombreDeRecuranceDeChaqueValeur.Count(); i++)
+                {
+                    if (nombreDeRecuranceDeChaqueValeur[i] == 2)
+                    {
+                        positionDesRécurence.Add(i);
+                    }
+                }
+                ValeurTextuelle = $"DoublePair composé d'une pair {valeurTextuelCartes[valeurDesCartes[positionDesRécurence[0]]]} et d'une pair {valeurTextuelCartes[valeurDesCartes[positionDesRécurence[1]]]}";
+            }
+            else if (IntPair())
+            {
+                for (int i = 0; i < nombreDeRecuranceDeChaqueValeur.Count(); i++)
+                {
+                    if (nombreDeRecuranceDeChaqueValeur[i] == 2)
+                    {
+                        ValeurTextuelle = $"Cartes composer d'une pair {valeurTextuelCartes[valeurDesCartes[i]]}";
+                    }
+                }
+            }
+            else
+            {
+                ValeurTextuelle = $"Main normale composé {valeurTextuelCartes[Cartes[0].Valeur]}, {valeurTextuelCartes[Cartes[1].Valeur]}, {valeurTextuelCartes[Cartes[2].Valeur]}, {valeurTextuelCartes[Cartes[3].Valeur]}, {valeurTextuelCartes[Cartes[4].Valeur]}";
+            }
             return ValeurTextuelle;
         }
         public int getValeur()
@@ -147,8 +222,20 @@ namespace Poker102
         }
         public bool Full()
         {
-            if (((Cartes[0].Valeur == Cartes[1].Valeur && Cartes[0].Valeur == Cartes[2].Valeur) || (Cartes[0].Valeur == Cartes[1].Valeur)) &&
-                ((Cartes[4].Valeur == Cartes[3].Valeur && Cartes[4].Valeur == Cartes[2].Valeur) || ((Cartes[4].Valeur == Cartes[3].Valeur))))
+            int Recurence2 = 0;
+            int Recurence3 = 0;
+            for (int i = 0; i < nombreDeRecuranceDeChaqueValeur.Count(); i++)
+            {
+                if (nombreDeRecuranceDeChaqueValeur[i] == 2)
+                {
+                    Recurence2++;
+                }
+                if (nombreDeRecuranceDeChaqueValeur[i] == 3)
+                {
+                    Recurence3++;
+                }
+            }
+            if (Recurence2 == 1 && Recurence3 == 1)
             {
                 return true;
             }
@@ -196,97 +283,45 @@ namespace Poker102
         }
         public bool Brelan()
         {
-            int compteur = 1;
-            for (int i = 0; i < Cartes.Length; i++)
+            for (int i = 0; i < nombreDeRecuranceDeChaqueValeur.Count(); i++)
             {
-                int positionTMP = i + 1;
-                if (positionTMP < Cartes.Length)
-                {
-                    //Si la valeur de l'as est de 
-
-                    if (Cartes[positionTMP].Valeur != Cartes[i].Valeur)
-                    {
-                        compteur = 0;
-                    }
-                    else
-                    {
-                        compteur ++;
-                    }
-
-                }
-                if (compteur == 3)
+                if (nombreDeRecuranceDeChaqueValeur[i] == 3)
                 {
                     return true;
                 }
-
             }
             return false;
         }
         public bool DoublePair()
         {
-
-            int compteur = 1;
-            int doubleTest = 0;
-            for (int i = 0; i < Cartes.Length; i += 2)
+            int compter = 0;
+            for (int i = 0; i < nombreDeRecuranceDeChaqueValeur.Count(); i++)
             {
-                int positionTMP = i + 1;
-                if (positionTMP < Cartes.Length)
+                if (nombreDeRecuranceDeChaqueValeur[i] == 2)
                 {
-                    if (Cartes[positionTMP].Valeur != Cartes[i].Valeur)
-                    {
-                        compteur = 0;
-                    }
-                    else
-                    {
-                        compteur++;
-                    }
+                    compter++;
                 }
-                if (compteur == 2)
-                {
-                    compteur = 1;
-                    doubleTest++;
-                }
-                if (doubleTest == 2)
-                {
-                    return true;
-                }
+            }
+            if (compter == 2)
+            {
+                return true;
             }
             return false;
         }
         public bool IntPair() 
         {
-            int compteur = 1;
-            for (int i = 0; i < Cartes.Length; i++)
+            for (int i = 0; i < nombreDeRecuranceDeChaqueValeur.Count(); i++)
             {
-                int positionTMP = i + 1;
-                if (positionTMP < Cartes.Length)
-                {
-                    //Si la valeur de l'as est de 
-
-                    if (Cartes[positionTMP].Valeur != Cartes[i].Valeur)
-                    {
-                        compteur = 0;
-                    }
-                    else
-                    {
-                        compteur++;
-                    }
-
-                }
-                if (compteur == 2)
+                if (nombreDeRecuranceDeChaqueValeur[i] == 2)
                 {
                     return true;
                 }
-
             }
             return false;
         }
-
         public int valeurCartes()
         {
-            return (int)(Math.Pow(Cartes[0].Valeur, 5) + Math.Pow(Cartes[1].Valeur, 4) + Math.Pow(Cartes[2].Valeur, 3) + Math.Pow(Cartes[3].Valeur, 2) + Math.Pow(Cartes[4].Valeur, 1));
+            return (int)(Math.Pow(Cartes[0].Valeur + 1, 5) + Math.Pow(Cartes[1].Valeur + 1, 4) + Math.Pow(Cartes[2].Valeur + 1, 3) + Math.Pow(Cartes[3] .Valeur + 1, 2) + Math.Pow(Cartes[4].Valeur + 1, 1));
         }
-        
-
     }
 }
