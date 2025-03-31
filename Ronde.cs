@@ -28,7 +28,7 @@ namespace pokerTp2
             {
                 joueur.Afficher();
                 Console.SetCursorPosition(0, 4 + (joueur._numeroJoueur * 5) + 6);
-                Console.WriteLine("Joueur " + (joueur._numeroJoueur + 1) + " :");
+                Console.WriteLine("Joueur " + (joueur._numeroJoueur + 1) + ": ");
                 Console.SetCursorPosition(DECALAGE_X - 13, 4 + (joueur._numeroJoueur * 5) + 6 );
                 Console.WriteLine(joueur.valeurEnFrancais());
                 

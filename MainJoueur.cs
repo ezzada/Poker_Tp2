@@ -52,15 +52,6 @@ namespace Poker102
         public void Afficher()
         {
             TrierMain();
-            evaluateur.TrouverLesSorteLeurNombreDeRecurence();
-
-            if (Gagnant)
-            {
-                foreach (Carte carte in Cartes)
-                {
-                    
-                }
-            }
             for (int i = 0; i < 5; i++)
             {
                 

@@ -25,6 +25,8 @@ namespace Poker102
         }
         public void TrouverLesSorteLeurNombreDeRecurence()
         {
+            nombreDeRecuranceDeChaqueValeur.Clear();
+            valeurDesCartes.Clear();
             int recurence = 1;
             for (int i = 0; i < Cartes.Length; i++)
             {
@@ -134,45 +136,122 @@ namespace Poker102
         }
         public int getValeur()
         {
-            
+            ValeurMain = 0;
+            TrouverLesSorteLeurNombreDeRecurence();
             if (QuintCouleur())
             {
                 ValeurMain = 8000000;
+                ValeurMain += Cartes[0].Valeur;
             }
             else if(Carre())
             {
                 ValeurMain = 7000000;
+                for (int i = 0; i < nombreDeRecuranceDeChaqueValeur.Count(); i++)
+                {
+                    if (nombreDeRecuranceDeChaqueValeur[i] == 4)
+                    {
+                        ValeurMain += valeurDesCartes[i] * 13;
+                    }
+                    else
+                    {
+                        ValeurMain += valeurDesCartes[i];
+                    }
+                }
             }
             else if (Full())
             {
                 ValeurMain = 6000000;
+                for (int i = 0; i < nombreDeRecuranceDeChaqueValeur.Count(); i++)
+                {
+                    if (nombreDeRecuranceDeChaqueValeur[i] == 3)
+                    {
+                        ValeurMain += valeurDesCartes[i] * 13;
+                    }
+                    else
+                    {
+                        ValeurMain += valeurDesCartes[i];
+                    }
+                }
             }
             else if (Couleur())
             {
                 ValeurMain = 5000000;
+                ValeurMain += valeurCartesNormaux();
             }
             else if (Quint())
             {
                 ValeurMain = 4000000;
+                ValeurMain += Cartes[0].Valeur;
             }
             else if (Brelan())
             {
                 ValeurMain = 3000000;
+                for (int i = 2; i >= 0; i--)
+                {
+                    bool tripleTrouve = false;
+                    if (nombreDeRecuranceDeChaqueValeur[i] == 3)
+                    {
+                        ValeurMain += (int)Math.Pow(valeurDesCartes[i], 2);
+                        tripleTrouve = true;
+                    }
+                    else
+                    {
+                        if (tripleTrouve)
+                        {
+                            ValeurMain += (int)Math.Pow(valeurDesCartes[i], i);
+                        }
+                        else
+                        {
+                            ValeurMain += (int)Math.Pow(valeurDesCartes[i], i - 1);
+                        }
+
+                    }
+                }
             }
             else if (DoublePair())
             {
                 ValeurMain = 2000000;
+                for (int i = 2; i >= 0; i--)
+                {
+                    if (nombreDeRecuranceDeChaqueValeur[i] == 2)
+                    {
+                        ValeurMain += (int)Math.Pow(valeurDesCartes[i], i);
+                    }
+                    else
+                    {
+                        ValeurMain += valeurDesCartes[i];
+                    }
+                }
             }
             else if (IntPair())
             {
                 ValeurMain = 1000000;
+                for (int i = 2; i >= 0; i--)
+                {
+                    bool doubleTrouve = false;
+                    if (nombreDeRecuranceDeChaqueValeur[i] == 2)
+                    {
+                        ValeurMain += (int)Math.Pow(valeurDesCartes[i], 2);
+                        doubleTrouve = true;
+                    }
+                    else
+                    {
+                        if (doubleTrouve)
+                        {
+                            ValeurMain += (int)Math.Pow(valeurDesCartes[i], i);
+                        }
+                        else
+                        {
+                            ValeurMain += (int)Math.Pow(valeurDesCartes[i], i - 1);
+                        }
+
+                    }
+                }
             }
             else
             {
-                ValeurMain = 0;
+                ValeurMain += valeurCartesNormaux();
             }
-
-            ValeurMain += valeurCartes();
             return ValeurMain;
         }
         public bool QuintCouleur()
@@ -188,7 +267,7 @@ namespace Poker102
                         continue;
                     }
 
-                    if (Cartes[positionTMP].Valeur != Cartes[i].Valeur - 1 || Cartes[positionTMP].Couleur != Cartes[i].Couleur)
+                    if (Cartes[positionTMP].Valeur != Cartes[i].Valeur - 1 || Cartes[positionTMP].Sorte != Cartes[i].Sorte)
                     {
                         return false;
                     }
@@ -249,7 +328,7 @@ namespace Poker102
                 if (positionTMP < Cartes.Length)
                 { 
                     
-                    if (Cartes[positionTMP].Couleur != Cartes[i].Couleur)
+                    if (Cartes[positionTMP].Sorte != Cartes[i].Sorte)
                     {
                         return false;
                     }
@@ -319,7 +398,7 @@ namespace Poker102
             }
             return false;
         }
-        public int valeurCartes()
+        public int valeurCartesNormaux()
         {
             return (int)(Math.Pow(Cartes[0].Valeur + 1, 5) + Math.Pow(Cartes[1].Valeur + 1, 4) + Math.Pow(Cartes[2].Valeur + 1, 3) + Math.Pow(Cartes[3] .Valeur + 1, 2) + Math.Pow(Cartes[4].Valeur + 1, 1));
         }
