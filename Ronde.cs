@@ -26,13 +26,17 @@ namespace pokerTp2
             trouverLeGagnant();
             foreach (MainJoueur joueur in joueurs)
             {
-                joueur.Afficher();
                 Console.SetCursorPosition(0, 4 + (joueur._numeroJoueur * 5) + 6);
                 Console.WriteLine("Joueur " + (joueur._numeroJoueur + 1) + ": ");
-                Console.SetCursorPosition(DECALAGE_X - 13, 4 + (joueur._numeroJoueur * 5) + 6 );
-                Console.WriteLine(joueur.valeurEnFrancais());
-                
             }
+            foreach (MainJoueur joueur in joueurs)
+            {
+                joueur.Afficher();
+                Thread.Sleep(500);
+                Console.SetCursorPosition(DECALAGE_X - 13, 4 + (joueur._numeroJoueur * 5) + 6);
+                Console.WriteLine(joueur.valeurEnFrancais());
+            }
+            Thread.Sleep(100);
             afficherGagnant();
 
         }
@@ -45,7 +49,7 @@ namespace pokerTp2
                 {
                     Console.SetCursorPosition(0, 0);
                     Console.Write($"Gagnant: Joueur {joueur._numeroJoueur + 1}");
-                    for (int i = 0; i < 5; i++)
+                    for (int i = 0; i < 15; i++)
                     {
                         foreach (Carte carte in joueur.Cartes)
                         {
@@ -53,13 +57,12 @@ namespace pokerTp2
                             carte.Sorte = 4;
                         }
                         joueur.Afficher();
-                        Thread.Sleep(400);
                         for (int j = 0; j < joueur.Cartes.Count(); j++)
                         {
                             joueur.Cartes[j].Sorte = stockageDesSortesCartes[j];
                         }
                         joueur.Afficher();
-                        Thread.Sleep(400);
+                        
                     }
                     
                 }

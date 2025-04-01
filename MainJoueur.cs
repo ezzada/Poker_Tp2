@@ -55,7 +55,8 @@ namespace Poker102
             for (int i = 0; i < 5; i++)
             {
                 
-                Cartes[i].Afficher(i, _numeroJoueur); 
+                Cartes[i].Afficher(i, _numeroJoueur);
+                Thread.Sleep(10);
 
             }
         }

@@ -14,8 +14,9 @@ namespace Poker102
         static void Main(string[] args)
         {
             bool continuerPartie = true;
-
-            while (continuerPartie)
+            bool commencerPartie = true;
+            Util.Question(ref commencerPartie, "Voulez-vous commencer une partie?");
+            while (continuerPartie && commencerPartie)
             {
                 Util.InitTapis();
                 Util.Titre("Tp2 Poker");
@@ -26,6 +27,7 @@ namespace Poker102
             }
             Util.ViderEcran();
             Util.Titre("Projet Réaliser par Adam Ezzahiri");
+            
         }
 
         
