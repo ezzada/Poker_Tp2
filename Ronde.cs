@@ -5,7 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Poker102;
 using static System.Runtime.InteropServices.JavaScript.JSType;
-
+//-----------------------------------------
+//  Nom: Ronde.cs
+//  Auteur : Adam Ezzahiri
+//  Date : 2025-04-02
+//  Description: Distribue les cartes aux joueurs, les affiche et trouve le gagnant
+//-----------------------------------------
 namespace pokerTp2
 {
     internal class Ronde
@@ -49,7 +54,7 @@ namespace pokerTp2
                 {
                     Console.SetCursorPosition(0, 0);
                     Console.Write($"Gagnant: Joueur {joueur._numeroJoueur + 1}");
-                    for (int i = 0; i < 15; i++)
+                    for (int i = 0; i < 10; i++)
                     {
                         foreach (Carte carte in joueur.Cartes)
                         {

@@ -5,7 +5,12 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using pokerTp2;
-
+//-----------------------------------------
+//  Nom: Evaluateur.cs
+//  Auteur : Adam Ezzahiri
+//  Date : 2025-04-02
+//  Description: Va permettre d'évaluer les mains de chaque joeur et de donner une valeur (entière et textuelle) à chaque main
+//-----------------------------------------
 namespace Poker102
 {
     internal class Evaluateur

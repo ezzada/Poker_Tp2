@@ -5,7 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using pokerTp2;
 using static System.Runtime.InteropServices.JavaScript.JSType;
-
+//-----------------------------------------
+//  Nom: MainJoueur.cs
+//  Auteur : Adam Ezzahiri
+//  Date : 2025-04-02
+//  Description: Va permettre d'afficher la main d'un joueur et d'initialiser un evaluateur pour la main du joueur
+//-----------------------------------------
 namespace Poker102
 {
     internal class MainJoueur
@@ -56,7 +61,7 @@ namespace Poker102
             {
                 
                 Cartes[i].Afficher(i, _numeroJoueur);
-                Thread.Sleep(10);
+                Thread.Sleep(35);
 
             }
         }

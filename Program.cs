@@ -4,7 +4,12 @@ using System.Security.Claims;
 using System.Text;
 using System;
 using pokerTp2;
-
+//-----------------------------------------
+//  Nom: Program.cs
+//  Auteur : Adam Ezzahiri
+//  Date : 2025-04-02
+//  Description: Interagie avce l'utilisateur pour commencer une partie de poker
+//-----------------------------------------
 namespace Poker102
 {
     internal class Program
@@ -26,7 +31,7 @@ namespace Poker102
                 Util.Question( ref continuerPartie,"Voulez-vous refaire une partie?");
             }
             Util.ViderEcran();
-            Util.Titre("Projet Réaliser par Adam Ezzahiri");
+            Util.Titre("Projet Réalisé par Adam Ezzahiri");
             
         }
 

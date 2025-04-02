@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+//-----------------------------------------
+//  Nom: Paquet.cs
+//  Auteur : Adam Ezzahiri
+//  Date : 2025-04-02
+//  Description: Initialise un paquet de 52 cartes et permet de les distribuer et de les brasser
+//-----------------------------------------
 namespace Poker102
 {
     internal class Paquet

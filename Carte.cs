@@ -4,7 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using pokerTp2;
-
+//-----------------------------------------
+//  Nom: Carte.cs
+//  Auteur : Adam Ezzahiri
+//  Date : 2025-04-02
+//  Description: Va contenir la classe Carte qui comportera les attributs et méthodes pour afficher et trouver les sorte et valeur de chaque carte
+//-----------------------------------------
 namespace Poker102
 {
 

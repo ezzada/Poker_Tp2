@@ -4,7 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using pokerTp2;
-
+//-----------------------------------------
+//  Nom: Util.cs
+//  Auteur : Adam Ezzahiri
+//  Date : 2025-04-02
+//  Description: Comporte des méthodes utilitaires pour l'affichage et la gestion des entrées
+//-----------------------------------------
 namespace Poker102
 {
     internal class Util
